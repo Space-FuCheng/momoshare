@@ -1,11 +1,10 @@
 /**
  * 墨墨背单词share_random
- * 请在MMSLS.js文件中填写分享链接
  */
  const $ = new Env("墨墨背单词share_random");
  const notify = $.isNode() ? require('./sendNotify') : '';
  const Notify = 1; //0为关闭通知，1为打开通知,默认为1
- const debug = 0; //0为关闭调试，1为打开调试,默认为0
+ const debug = 1; //0为关闭调试，1为打开调试,默认为0
 
  let msg = '';
  let UA = '';
@@ -136,7 +135,7 @@ async function MM() {
                  }
                 let sum = data.match(/(?<=增加了)(.+?)(?=个单词)/)[0];
                 let namedata = data.match(/(?<=alt=")\S*(?="\/)/)[0];
-                console.log(`用户${namedata}单词数增加到${sum}`);
+                console.log(`【 用  户 】：${namedata} 加了 ${sum} 个单词上限`);
                 msg += `\n 【 用  户 】：${namedata} 加了 ${sum} 个单词上限`
 			} catch (e) {
 				$.logErr(e, resp);
