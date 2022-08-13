@@ -47,7 +47,8 @@ async function MM() {
      if (url) {
         return true;
      } else {
-        $.log(`\n【${$.name}】：未在MMSLS.js文件中填写分享链接`)
+        $.log(`\n【${$.name}】：未在MMSLS.js文件中填写分享链接`);
+        return;
      }
  }
 
