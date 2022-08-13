@@ -1,131 +1,57 @@
 /**
- * 墨墨背单词share 
+ * 墨墨背单词share_random
+ * 请在MMSLS.js文件中填写分享链接
  */
- const $ = new Env("墨墨背单词share");
+ const $ = new Env("墨墨背单词share_random");
  const notify = $.isNode() ? require('./sendNotify') : '';
  const Notify = 1; //0为关闭通知，1为打开通知,默认为1
  const debug = 0; //0为关闭调试，1为打开调试,默认为0
- const USER_AGENTS = [
-  
-    "Mozilla/5.0 (Linux; Android 10; ONEPLUS A5010) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; ONEPLUS A6000) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; ONEPLUS A5010) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 9; PAR-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; LYA-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; GM1910) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 9; Mi Note 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 9; MI 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; MI 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 8.1.0; MI 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; MI 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",  
-    "Mozilla/5.0 (Linux; Android 9; MIX 2S) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.181 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 11; Redmi K30 5G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; Redmi Note 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; Redmi K20 Pro Premium Edition) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 11; Redmi K20 Pro Premium Edition) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 9; M2006J10C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 10; M2006J10C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 9; MHA-AL00 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 8.1.0; 16 X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 8.0.0; HTC U-3w) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36", 
-    "Mozilla/5.0 (Linux; Android 9; 16T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.126 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 8.1.0; 16th Plus) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 15_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPad; CPU OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
-  ]
- 
- let MMSL = ($.isNode() ? process.env.MMSL : $.getdata('MMSL')) || "";
- let MMSLArr = [];
+
  let msg = '';
  let UA = '';
 
- 
- 
  !(async () => {
  
-     if (!(await Envs()))  //多账号分割 判断变量是否为空  初步处理多账号
+     if (!(await MM()))  //多账号分割 判断变量是否为空  初步处理多账号
          return;
      else {
- 
          console.log(
              `\n\n=========================================    脚本执行 - 北京时间(UTC+8)：${new Date(
                  new Date().getTime() +
                  new Date().getTimezoneOffset() * 60 * 1000 +
                  8 * 60 * 60 * 1000
              ).toLocaleString()} =========================================\n`);
- 
- 
-         await wyy();
-         await $.wait(2 * 1000);
          await getthisIP();
          await $.wait(2 * 1000);
-
- 
-         $.log(`\n=================== 共找到 ${MMSLArr.length} 个账号 ===================`)
- 
-         if (debug) {
-             console.log(`【debug】 这是你的账号数组:\n ${MMSLArr}`);
-         }      
- 
-         for (let index = 0; index < MMSLArr.length; index++) {
- 
- 
-             let num = index + 1
-             $.log(`\n========= 开始【第 ${num} 个账号】=========\n`)
-             msg += `\n【第 ${num} 个账号】`
-             MMSL = MMSLArr[index];   
-             if (debug) {
-                 console.log(`\n【debug】 这是你第 ${num}`);
-             }
-            //  UA = require('./USER_AGENTS').USER_AGENT;
-            UA = USER_AGENTS[randomNumber(0, USER_AGENTS.length)];
-
+             UA = require('./USER_AGENTS').USER_AGENT;
              await $.wait(2 * 1000);
              if (debug) {
                 console.log(`\n【debug】 这是你的UA数据:\n ${UA}\n`);
              }
- 
- 
              $.log('开始 【点击分享链接】')
              await addLike()
-             await $.wait(60 * 1000);
- 
- 
-         }
-         await SendMsg(msg);
- 
+             await $.wait(2 * 1000);
+         await wyy();
+         await $.wait(2 * 1000); 
+        // let hour = new Date().getHours();
+        // if (hour%4 != 0){
+            await SendMsg(msg);
+        //  }
      }
- 
  })()
      .catch((e) => $.logErr(e))
      .finally(() => $.done())
- 
  //#region 固定代码
  // ============================================变量检查============================================ \\
- async function Envs() {
-     if (MMSL) {
-         if (MMSL.indexOf("@") != -1) {
-             MMSL.split("@").forEach((item) => {
-                 MMSLArr.push(item);
-             });
-         } else if (MMSL.indexOf("\n") != -1) {
-            MMSL.split("\n").forEach((item) => {
-                 MMSLArr.push(item);
-             });
-         } else {
-             MMSLArr.push(MMSL);
-         }
+async function MM() {
+     let url = require('./MMSLS').MMSL_random;
+     if (url) {
+        return true;
      } else {
-         $.log(`\n【${$.name}】：未填写变量 MMSL`)
-         return;
+        $.log(`\n【${$.name}】：未在MMSLS.js文件中填写分享链接`)
      }
- 
-     return true;
  }
- 
+
  // ============================================发送消息============================================ \\
  async function SendMsg(message) {
      if (!message)
@@ -144,15 +70,6 @@
  }
 
 /**
- * 生成随机数字
- * @param {number} min 最小值（包含）
- * @param {number} max 最大值（不包含）
- */
- function randomNumber(min = 0, max = 100) {
-  return Math.min(Math.floor(min + Math.random() * (max - min)), max);
- }
-
-/**
  * 请求接口
  */
  async function getthisIP(timeout = 3 * 1000) {
@@ -167,8 +84,8 @@
                  }
 				data = JSON.parse(data);
                 let _ip = data.ip;
-                console.log(`本次请求的ip为：${_ip}`);
-                msg += `\n 本次请求的ip为：${_ip}`
+                console.log(`【请求的 ip 】：${_ip}`);
+                msg += `\n 【请求的 ip 】：${_ip}`
 			} catch (e) {
 				$.logErr(e, resp);
 			} finally {
@@ -202,7 +119,7 @@
  async function addLike(timeout = 3 * 1000) {
 	return new Promise((resolve) => {
 		let url = {
-			url: MMSL,
+			url: require('./MMSLS').MMSL_random,
             headers: {
                 'Host': 'www.maimemo.com',
                 'user-agent': UA
@@ -220,7 +137,7 @@
                 let sum = data.match(/(?<=增加了)(.+?)(?=个单词)/)[0];
                 let namedata = data.match(/(?<=alt=")\S*(?="\/)/)[0];
                 console.log(`用户${namedata}单词数增加到${sum}`);
-                msg += `\n 用户${namedata}单词数增加到${sum}`
+                msg += `\n 【 用  户 】：${namedata} 加了 ${sum} 个单词上限`
 			} catch (e) {
 				$.logErr(e, resp);
 			} finally {
