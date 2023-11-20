@@ -60,7 +60,7 @@ const USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
     "Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
 "Mozilla/5.0 (iPad; CPU OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1",
-"Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 6.2; Trident/5.0) “,
+"Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 6.2; Trident/5.0) ",
 "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.1)",
 "Mozilla/5.0 (compatible; MSIE 10.0; Windows 95; Trident/4.0)",
 "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/4.1)",
