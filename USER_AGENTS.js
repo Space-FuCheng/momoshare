@@ -112,9 +112,7 @@ const USER_AGENTS = [
       return;
     }
     USER_AGENT = stdout.trim();
-    module.exports = {
-    USER_AGENT
-  }
+    
   });
   
 
@@ -129,6 +127,8 @@ const USER_AGENTS = [
 //   console.log(`脚本输出: ${stdout}`);
 // });
 
-
+module.exports = {
+    USER_AGENT
+  }
 
   
