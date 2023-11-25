@@ -27,7 +27,6 @@
              if (debug) {
                 console.log(`\n【debug】 这是你的UA数据:\n ${UA}\n`);
              }
-	     
              $.log('开始 【点击分享链接】')
              await addLike()
              await $.wait(2 * 1000);
