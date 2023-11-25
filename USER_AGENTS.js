@@ -114,42 +114,28 @@ const USER_AGENTS = [
 //     USER_AGENT = stdout.trim();
     
 //   });
-  
 
-// // const { exec } = require('child_process');
-
-// // exec('python C:/Users/FuCheng/Desktop/test.py', (error, stdout, stderr) => {
-// //   if (error) {
-// //     console.error(`执行出错: ${error}`);
-// //     return;
-// //   }
-// //   const USER_AGENT = stdout.trim();
-// //   console.log(`脚本输出: ${stdout}`);
-// // });
 
 // module.exports = {
 //     USER_AGENT
 //   }
 
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 
-let USER_AGENT = '';
+try {
+    let USER_AGENT = ''; // 定义一个变量以存储 stdout
+    const stdout = execSync('python ./fake-useragent-1.4.0/src/fake_useragent/fake.py', { encoding: 'utf-8' });
+    USER_AGENT = stdout.trim();
 
-const getUserAgent = () => {
-  return new Promise((resolve, reject) => {
-    exec('python ./fake-useragent-1.4.0/src/fake_useragent/fake.py', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`执行出错: ${error}`);
-        reject(error);
-      } else {
-        USER_AGENT = stdout.trim();
-        resolve(USER_AGENT);
-      }
-    });
-  });
-};
+    module.exports = {
+        USER_AGENT
+    };
+} catch (error) {
+    console.error(`执行出错: ${error}`);
+}
 
-module.exports = { getUserAgent };
+
+
 
 
   
