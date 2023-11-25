@@ -227,3 +227,5 @@ class FakeUserAgent:
 
 # common alias
 UserAgent = FakeUserAgent
+ua = UserAgent()
+print(ua.random)
