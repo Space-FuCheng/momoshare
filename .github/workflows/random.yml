@@ -28,6 +28,8 @@ jobs:
       - name: npm install
         run: |
           npm install
+      - name: Install Python dependencies
+        run: pip install fake_useragent
       - name: '运行'
         run: |
           node momo_random.js
