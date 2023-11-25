@@ -133,32 +133,23 @@ const USER_AGENTS = [
 
 const { exec } = require('child_process');
 
-function getUserAgent() {
+let USER_AGENT = '';
+
+const getUserAgent = () => {
   return new Promise((resolve, reject) => {
     exec('python ./fake-useragent-1.4.0/src/fake_useragent/fake.py', (error, stdout, stderr) => {
       if (error) {
         console.error(`执行出错: ${error}`);
         reject(error);
-        return;
+      } else {
+        USER_AGENT = stdout.trim();
+        resolve(USER_AGENT);
       }
-      const USER_AGENT = stdout.trim();
-      console.log(`脚本输出: ${USER_AGENT}`); // 在回调函数中输出 stdout
-      resolve(USER_AGENT); // 将值 resolve 出去
     });
   });
-}
+};
 
-// 在异步函数中调用获取 USER_AGENT 的函数
-async function runScript() {
-  try {
-    const USER_AGENT = await getUserAgent(); // 等待获取 USER_AGENT 的值
-    console.log('获取到的 USER_AGENT:', USER_AGENT);
-    module.exports = { USER_AGENT }; // 导出 USER_AGENT 变量
-  } catch (error) {
-    console.error('获取 USER_AGENT 失败:', error);
-  }
-}
+module.exports = { getUserAgent };
 
-runScript(); // 执行异步函数
 
   
