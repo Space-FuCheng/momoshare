@@ -22,11 +22,21 @@
              ).toLocaleString()} =========================================\n`);
          await getthisIP();
          await $.wait(2 * 1000);
-             UA = require('./USER_AGENTS').USER_AGENT;
-             await $.wait(2 * 1000);
-             if (debug) {
+             // UA = require('./USER_AGENTS').USER_AGENT;
+             // await $.wait(2 * 1000);
+             // if (debug) {
+             //    console.log(`\n【debug】 这是你的UA数据:\n ${UA}\n`);
+             // }
+	     await getUserAgent() // 获取 USER_AGENT
+        .then(agent => {
+            UA = agent; // 将获取到的 USER_AGENT 赋值给 UA
+            if (debug) {
                 console.log(`\n【debug】 这是你的UA数据:\n ${UA}\n`);
-             }
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
              $.log('开始 【点击分享链接】')
              await addLike()
              await $.wait(2 * 1000);
