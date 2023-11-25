@@ -112,7 +112,9 @@ const USER_AGENTS = [
       return;
     }
     USER_AGENT = stdout.trim();
-    console.log(`脚本输出: ${USER_AGENT}`); // 在回调函数中输出 stdout
+    module.exports = {
+    USER_AGENT
+  }
   });
   
 
@@ -129,6 +131,4 @@ const USER_AGENTS = [
 
 
 
-  module.exports = {
-    USER_AGENT
-  }
+  
