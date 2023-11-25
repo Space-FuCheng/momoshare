@@ -100,18 +100,18 @@ const USER_AGENTS = [
   // function randomNumber(min = 0, max = 100) {
   //   return Math.min(Math.floor(min + Math.random() * (max - min)), max);
   // }
-  // const USER_AGENT = USER_AGENTS[randomNumber(0, USER_AGENTS.length)];
+  const USER_AGENT = USER_AGENTS[randomNumber(0, USER_AGENTS.length)];
 
-const { exec } = require('child_process');
+// const { exec } = require('child_process');
 
-exec('python ./src/fake_useragent/fake.py', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`执行出错: ${error}`);
-    return;
-  }
-  const USER_AGENT = stdout.trim();
-  console.log(`脚本输出: ${stdout}`);
-});
+// exec('python ./src/fake_useragent/fake.py', (error, stdout, stderr) => {
+//   if (error) {
+//     console.error(`执行出错: ${error}`);
+//     return;
+//   }
+//   const USER_AGENT = stdout.trim();
+//   console.log(`脚本输出: ${stdout}`);
+// });
 
 
   module.exports = {
